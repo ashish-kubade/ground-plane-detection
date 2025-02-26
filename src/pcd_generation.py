@@ -5,24 +5,20 @@ import sys
 
 class PCD_Generator:
     def __init__(self):
-        
+
         pass
         
-    def run(self, rgb_image, depth_image, intrinsics=None) -> object:
+    def run(self, rgb_image, depth_image, intrinsics, save_pcd=False) -> object:
         """Convert an RGB + depth image to a 3D point cloud."""
         if isinstance(rgb_image, str):
             rgb_image = cv2.imread(rgb_image)[:,:,::-1] #bgr to rgb
         if isinstance(depth_image, str):
             depth_image = cv2.imread(depth_image, cv2.IMREAD_UNCHANGED)
 
-        height, width = depth_image.shape
+        height, width, _ = rgb_image.shape
         
         # Create pixel coordinate grid
         u, v = np.meshgrid(np.arange(width), np.arange(height))
-        if intrinsics == None:
-            fx, fy = 500.0, 500.0  # Focal length in pixels
-            cx, cy = rgb_image.shape[1] // 2, rgb_image.shape[0] // 2  # Principal point
-            intrinsics = np.array([[fx, 0, cx], [0, fy, cy], [0, 0, 1]])
 
         # Normalize pixel coordinates
         x = (u - intrinsics[0, 2]) / intrinsics[0, 0]  # (u - cx) / fx
@@ -45,5 +41,6 @@ class PCD_Generator:
         pcd = o3d.geometry.PointCloud()
         pcd.points = o3d.utility.Vector3dVector(points)
         pcd.colors = o3d.utility.Vector3dVector(colors)
-        
+        if save_pcd:
+            o3d.io.write_point_cloud("output.ply", pcd)
         return pcd
