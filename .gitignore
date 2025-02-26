@@ -28,6 +28,7 @@ data/
 *.csv
 *.json
 *.xlsx
+*.ply
 
 # System files
 .DS_Store
