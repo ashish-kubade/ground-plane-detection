@@ -1,18 +1,12 @@
-import os
-import sys
-
-from networkx import general_random_intersection_graph
 import torch
 import numpy as np
 from argparse import ArgumentParser
-import cv2
 
 from depth_generation import DepthGeneartor, DepthGeneratorDepthPro, DepthGeneratorDepthAnything
 from pcd_generation import PCD_Generator
 from detect_plane import detect_plane
 import open3d as o3d
 import time
-#instantiate models
 
 def run(parser, device):
     image_path = parser.image_path

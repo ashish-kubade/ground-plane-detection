@@ -1,8 +1,6 @@
 import cv2
 import numpy as np
-import open3d as o3d
 from pcd_generation import PCD_Generator
-import open3d as o3d
 
 def detect_plane(image_path, depth_results, pcd_generator, use_defaults, save_pcd=False):
 

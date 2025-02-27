@@ -1,10 +1,10 @@
-from abc import abstractmethod
 from PIL import Image
 import numpy as np
 
 import torch
 from transformers import DepthProImageProcessorFast, DepthProForDepthEstimation
 from transformers import pipeline
+
 class DepthGeneartor:
     def __init__(self, device=None) -> None:
         if device is not None:
@@ -12,7 +12,6 @@ class DepthGeneartor:
         else:
             self.device = self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
            
-
     @abstractmethod
     def run(self, image_path, save_depth=False):
         pass
@@ -67,5 +66,4 @@ class DepthGeneratorDepthPro(DepthGeneartor):
                 "field_of_view": field_of_view,
                 "focal_length": focal_length,
                 "default_intrinsics": False
-
                 }

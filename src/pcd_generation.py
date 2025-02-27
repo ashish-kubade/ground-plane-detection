@@ -1,7 +1,6 @@
 import numpy as np
 import cv2
 import open3d as o3d
-import sys
 
 class PCD_Generator:
     def __init__(self):
