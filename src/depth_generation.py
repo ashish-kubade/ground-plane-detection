@@ -1,3 +1,5 @@
+from abc import abstractmethod
+
 from PIL import Image
 import numpy as np
 
@@ -5,7 +7,7 @@ import torch
 from transformers import DepthProImageProcessorFast, DepthProForDepthEstimation
 from transformers import pipeline
 
-class DepthGeneartor:
+class DepthGeneartor:    
     def __init__(self, device=None) -> None:
         if device is not None:
             self.device = device

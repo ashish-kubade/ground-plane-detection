@@ -19,7 +19,7 @@ def detect_plane(image_path, depth_results, pcd_generator, use_defaults, save_pc
     depth_image = depth_results['depth']
     pcd = pcd_generator.run(image_path, depth_image=depth_image, intrinsics=intrinsics, save_pcd=save_pcd)
 
-    plane_model, inliers = pcd.segment_plane(distance_threshold=0.1, ransac_n=3, num_iterations=5000)
+    plane_model, inliers = pcd.segment_plane(distance_threshold=10, ransac_n=3, num_iterations=5000)
 
     inlier_cloud = pcd.select_by_index(inliers)
     outlier_cloud = pcd.select_by_index(inliers, invert=True)
