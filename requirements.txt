@@ -1,6 +1,6 @@
 numpy
 torch
 transformers
-python-opencv
+opencv-python
 pillow
 open3d
